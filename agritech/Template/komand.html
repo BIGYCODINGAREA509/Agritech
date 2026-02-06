@@ -1,0 +1,1704 @@
+<!DOCTYPE html>
+<html lang="ht">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pase Kòmand Ou - AgriTech Ayiti</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #2e7d32;
+            --primary-dark: #1b5e20;
+            --primary-light: #4caf50;
+            --secondary: #ff9800;
+            --accent: #8bc34a;
+            --dark: #1a1a1a;
+            --light: #f8f9fa;
+            --gray: #6c757d;
+            --white: #ffffff;
+            --shadow: 0 4px 20px rgba(0,0,0,0.1);
+            --shadow-lg: 0 10px 40px rgba(0,0,0,0.15);
+            --radius: 12px;
+            --radius-lg: 20px;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e8f5e9 100%);
+            color: var(--dark);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        /* ============================================
+           SECTION 1: NAVIGATION
+        ============================================ */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 1rem 0;
+            box-shadow: var(--shadow);
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            text-decoration: none;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .logo-icon {
+            font-size: 2rem;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 500;
+            transition: color 0.3s;
+            position: relative;
+        }
+
+        .nav-link:hover, .nav-link.active {
+            color: var(--primary);
+        }
+
+        .nav-link.active::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: var(--primary);
+            border-radius: 2px;
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+        }
+
+        .hamburger span {
+            width: 25px;
+            height: 3px;
+            background: var(--dark);
+            border-radius: 3px;
+            transition: 0.3s;
+        }
+
+        /* ============================================
+           SECTION 2: HERO / PAGE HEADER
+        ============================================ */
+        .page-header {
+            margin-top: 80px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            padding: 4rem 2rem;
+            text-align: center;
+            color: var(--white);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .page-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        }
+
+        .page-header-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .page-header h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .page-header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Breadcrumb */
+        .breadcrumb {
+            background: var(--white);
+            padding: 1rem 0;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .breadcrumb-nav {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        .breadcrumb-nav a {
+            color: var(--gray);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .breadcrumb-nav a:hover {
+            color: var(--primary);
+        }
+
+        .breadcrumb-nav .current {
+            color: var(--primary);
+            font-weight: 500;
+        }
+
+        /* ============================================
+           SECTION 3: PRODUCT SELECTION
+        ============================================ */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .section {
+            padding: 3rem 0;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 2.5rem;
+        }
+
+        .section-tag {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--primary-light), var(--accent));
+            color: var(--white);
+            padding: 0.4rem 1.2rem;
+            border-radius: 25px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 1rem;
+        }
+
+        .section-title {
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: var(--dark);
+            margin-bottom: 0.5rem;
+        }
+
+        .section-subtitle {
+            color: var(--gray);
+            font-size: 1.1rem;
+        }
+
+        .order-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 2rem;
+        }
+
+        .products-selection {
+            background: var(--white);
+            border-radius: var(--radius-lg);
+            padding: 2rem;
+            box-shadow: var(--shadow);
+        }
+
+        .selection-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid #f0f0f0;
+        }
+
+        .selection-header h3 {
+            font-size: 1.4rem;
+            color: var(--dark);
+        }
+
+        .item-count {
+            background: var(--primary);
+            color: var(--white);
+            padding: 0.4rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .order-products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .order-product-card {
+            background: var(--light);
+            border-radius: var(--radius);
+            overflow: hidden;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .order-product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .order-product-card.selected {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(46, 125, 50, 0.1);
+        }
+
+        .order-product-card.pre-selected {
+            border-color: var(--secondary);
+            box-shadow: 0 0 0 4px rgba(255, 152, 0, 0.2);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { box-shadow: 0 0 0 4px rgba(255, 152, 0, 0.2); }
+            50% { box-shadow: 0 0 0 8px rgba(255, 152, 0, 0.1); }
+        }
+
+        .order-product-image {
+            position: relative;
+            height: 160px;
+            overflow: hidden;
+        }
+
+        .order-product-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s;
+        }
+
+        .order-product-card:hover .order-product-image img {
+            transform: scale(1.05);
+        }
+
+        .order-product-price {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            background: var(--primary);
+            color: var(--white);
+            padding: 0.4rem 0.8rem;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .order-product-info {
+            padding: 1.2rem;
+        }
+
+        .order-product-info h4 {
+            font-size: 1.1rem;
+            margin-bottom: 0.3rem;
+            color: var(--dark);
+        }
+
+        .order-product-info p {
+            font-size: 0.85rem;
+            color: var(--gray);
+            margin-bottom: 1rem;
+        }
+
+        .quantity-control {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.8rem;
+            margin-bottom: 1rem;
+        }
+
+        .qty-btn {
+            width: 35px;
+            height: 35px;
+            border: none;
+            background: var(--primary);
+            color: var(--white);
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.2rem;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .qty-btn:hover {
+            background: var(--primary-dark);
+            transform: scale(1.1);
+        }
+
+        .qty-input {
+            width: 50px;
+            height: 35px;
+            text-align: center;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 1rem;
+        }
+
+        .add-to-order-btn {
+            width: 100%;
+            padding: 0.8rem;
+            border: none;
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            color: var(--white);
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .add-to-order-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(46, 125, 50, 0.3);
+        }
+
+        .add-to-order-btn.added {
+            background: linear-gradient(135deg, #28a745, #34ce57);
+        }
+
+        /* ============================================
+           SECTION 4: ORDER SUMMARY (CART)
+        ============================================ */
+        .order-summary {
+            background: var(--white);
+            border-radius: var(--radius-lg);
+            padding: 2rem;
+            box-shadow: var(--shadow);
+            height: fit-content;
+            position: sticky;
+            top: 100px;
+        }
+
+        .summary-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid #f0f0f0;
+        }
+
+        .cart-icon {
+            font-size: 2rem;
+        }
+
+        .summary-header h3 {
+            font-size: 1.4rem;
+            color: var(--dark);
+        }
+
+        .cart-items {
+            max-height: 300px;
+            overflow-y: auto;
+            margin-bottom: 1.5rem;
+        }
+
+        .empty-cart {
+            text-align: center;
+            padding: 2rem;
+            color: var(--gray);
+        }
+
+        .empty-cart-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            opacity: 0.5;
+        }
+
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem;
+            background: var(--light);
+            border-radius: var(--radius);
+            margin-bottom: 0.8rem;
+            animation: slideIn 0.3s ease;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .cart-item-info {
+            flex: 1;
+        }
+
+        .cart-item-name {
+            font-weight: 600;
+            color: var(--dark);
+            margin-bottom: 0.2rem;
+        }
+
+        .cart-item-qty {
+            font-size: 0.85rem;
+            color: var(--gray);
+        }
+
+        .cart-item-price {
+            font-weight: 700;
+            color: var(--primary);
+            margin-right: 0.8rem;
+        }
+
+        .remove-item-btn {
+            background: #ffebee;
+            color: #c62828;
+            border: none;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .remove-item-btn:hover {
+            background: #c62828;
+            color: var(--white);
+        }
+
+        .cart-totals {
+            border-top: 2px solid #f0f0f0;
+            padding-top: 1rem;
+        }
+
+        .total-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.8rem;
+            font-size: 1rem;
+        }
+
+        .total-row.grand-total {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--primary);
+            padding-top: 0.8rem;
+            border-top: 2px dashed #e0e0e0;
+        }
+
+        /* ============================================
+           SECTION 5: CUSTOMER FORM
+        ============================================ */
+        .customer-form-section {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e8f5e9 100%);
+            padding: 4rem 0;
+        }
+
+        .form-container {
+            background: var(--white);
+            border-radius: var(--radius-lg);
+            padding: 3rem;
+            box-shadow: var(--shadow-lg);
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group.full-width {
+            grid-column: span 2;
+        }
+
+        .form-group label {
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+            color: var(--dark);
+        }
+
+        .required {
+            color: #c62828;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            padding: 1rem;
+            border: 2px solid #e0e0e0;
+            border-radius: var(--radius);
+            font-size: 1rem;
+            transition: all 0.3s;
+            font-family: inherit;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(46, 125, 50, 0.1);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        /* Delivery Options */
+        .delivery-options, .payment-methods {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+        }
+
+        .delivery-option, .payment-method {
+            position: relative;
+        }
+
+        .delivery-option input,
+        .payment-method input {
+            position: absolute;
+            opacity: 0;
+        }
+
+        .delivery-option label,
+        .payment-method label {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 1.5rem 1rem;
+            border: 2px solid #e0e0e0;
+            border-radius: var(--radius);
+            cursor: pointer;
+            transition: all 0.3s;
+            text-align: center;
+        }
+
+        .delivery-option input:checked + label,
+        .payment-method input:checked + label {
+            border-color: var(--primary);
+            background: rgba(46, 125, 50, 0.05);
+        }
+
+        .option-icon, .method-icon {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .option-name, .method-name {
+            font-weight: 600;
+            font-size: 0.95rem;
+            margin-bottom: 0.3rem;
+        }
+
+        .option-price {
+            color: var(--primary);
+            font-weight: 700;
+        }
+
+        /* Submit Button */
+        .submit-order-btn {
+            width: 100%;
+            padding: 1.2rem;
+            margin-top: 2rem;
+            border: none;
+            background: linear-gradient(135deg, #25d366, #128c7e);
+            color: var(--white);
+            border-radius: var(--radius);
+            font-size: 1.2rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.8rem;
+        }
+
+        .submit-order-btn:hover:not(:disabled) {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(37, 211, 102, 0.4);
+        }
+
+        .submit-order-btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+        }
+
+        .submit-order-btn svg {
+            width: 24px;
+            height: 24px;
+        }
+
+        /* WhatsApp Button Style */
+        .whatsapp-btn {
+            background: linear-gradient(135deg, #25d366, #128c7e) !important;
+        }
+
+        /* ============================================
+           SECTION 6: FOOTER
+        ============================================ */
+        .footer {
+            background: var(--dark);
+            color: var(--white);
+            padding: 4rem 0 2rem;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1.5fr;
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            text-decoration: none;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--white);
+            margin-bottom: 1rem;
+        }
+
+        .footer-description {
+            color: rgba(255,255,255,0.7);
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-social {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .social-link {
+            width: 40px;
+            height: 40px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+        }
+
+        .social-link:hover {
+            background: var(--primary);
+            transform: translateY(-3px);
+        }
+
+        .social-link svg {
+            width: 20px;
+            height: 20px;
+            fill: var(--white);
+        }
+
+        .footer-links h4 {
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+            color: var(--white);
+        }
+
+        .footer-links ul {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-links a {
+            color: rgba(255,255,255,0.7);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: var(--primary-light);
+        }
+
+        .newsletter-form {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .newsletter-form input {
+            flex: 1;
+            padding: 0.8rem 1rem;
+            border: none;
+            border-radius: var(--radius);
+            background: rgba(255,255,255,0.1);
+            color: var(--white);
+        }
+
+        .newsletter-form input::placeholder {
+            color: rgba(255,255,255,0.5);
+        }
+
+        .btn-subscribe {
+            padding: 0.8rem 1.2rem;
+            border: none;
+            background: var(--primary);
+            color: var(--white);
+            border-radius: var(--radius);
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .btn-subscribe:hover {
+            background: var(--primary-light);
+        }
+
+        .btn-subscribe svg {
+            width: 20px;
+            height: 20px;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding-top: 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .footer-bottom p {
+            color: rgba(255,255,255,0.6);
+        }
+
+        .footer-legal {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .footer-legal a {
+            color: rgba(255,255,255,0.6);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.3s;
+        }
+
+        .footer-legal a:hover {
+            color: var(--white);
+        }
+
+        /* ============================================
+           MODALS
+        ============================================ */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.6);
+            backdrop-filter: blur(5px);
+            z-index: 2000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+
+        .modal-overlay.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: var(--white);
+            border-radius: var(--radius-lg);
+            padding: 3rem;
+            max-width: 500px;
+            width: 100%;
+            text-align: center;
+            animation: modalSlideIn 0.3s ease;
+        }
+
+        @keyframes modalSlideIn {
+            from {
+                opacity: 0;
+                transform: scale(0.9) translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
+        }
+
+        .success-icon {
+            font-size: 5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .modal-content h2 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            color: var(--dark);
+        }
+
+        .modal-content p {
+            color: var(--gray);
+            margin-bottom: 1.5rem;
+        }
+
+        .order-number {
+            background: var(--light);
+            padding: 1rem 2rem;
+            border-radius: var(--radius);
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            font-family: monospace;
+        }
+
+        .modal-btn {
+            padding: 1rem 2rem;
+            border: none;
+            background: var(--primary);
+            color: var(--white);
+            border-radius: var(--radius);
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .modal-btn:hover {
+            background: var(--primary-dark);
+        }
+
+        /* Pre-selected product highlight */
+        .pre-selected-banner {
+            background: linear-gradient(135deg, var(--secondary), #f57c00);
+            color: var(--white);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            display: inline-block;
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .order-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .order-summary {
+                position: static;
+            }
+
+            .footer-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: var(--white);
+                flex-direction: column;
+                padding: 1rem 2rem;
+                box-shadow: var(--shadow);
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .hamburger {
+                display: flex;
+            }
+
+            .page-header h1 {
+                font-size: 2rem;
+            }
+
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .form-group.full-width {
+                grid-column: span 1;
+            }
+
+            .delivery-options, .payment-methods {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+                gap: 1rem;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- ============================================
+         SECTION 1: NAVIGATION
+    ============================================ -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="Accueil.html" class="logo">
+                <span class="logo-icon">&#127807;</span>
+                <span class="logo-text">AgriTech</span>
+            </a>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="Accueil.html" class="nav-link">Accueil</a></li>
+                <li><a href="Accueil.html#produits" class="nav-link">Nos Produits</a></li>
+                <li><a href="Accueil.html#entrepots" class="nav-link">Entrepôts</a></li>
+                <li><a href="Accueil.html#entreprise" class="nav-link">Notre Entreprise</a></li>
+                <li><a href="komand.html" class="nav-link active">Commander</a></li>
+            </ul>
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ============================================
+         SECTION 2: HERO / PAGE HEADER
+    ============================================ -->
+    <header class="page-header">
+        <div class="page-header-content">
+            <h1>&#128722; Pase Kòmand Ou</h1>
+            <p>Chwazi pwodui ou vle yo, ranpli enfòmasyon ou yo, epi voye kòmand ou a pa WhatsApp</p>
+        </div>
+    </header>
+
+    <!-- Breadcrumb -->
+    <div class="breadcrumb">
+        <div class="breadcrumb-nav">
+            <a href="Accueil.html">Accueil</a>
+            <span>></span>
+            <span class="current">Kòmand Pwodui</span>
+        </div>
+    </div>
+
+    <!-- ============================================
+         SECTION 3: PRODUCT SELECTION
+    ============================================ -->
+    <section class="section">
+        <div class="container">
+            <div class="order-grid">
+                <div class="products-selection">
+                    <div class="selection-header">
+                        <h3>&#127825; Chwazi Pwodui Ou Yo</h3>
+                        <span class="item-count" id="itemCount">0 atik</span>
+                    </div>
+                    
+                    <div class="order-products-grid" id="productsGrid">
+                        <!-- Products will be loaded by JavaScript -->
+                    </div>
+                </div>
+
+                <!-- ============================================
+                     SECTION 4: ORDER SUMMARY (CART)
+                ============================================ -->
+                <div class="order-summary">
+                    <div class="summary-header">
+                        <span class="cart-icon">&#128722;</span>
+                        <h3>Rezime Kòmand</h3>
+                    </div>
+                    
+                    <div class="cart-items" id="cartItems">
+                        <div class="empty-cart">
+                            <div class="empty-cart-icon">&#128722;</div>
+                            <p>Panje ou a vid</p>
+                            <p style="font-size: 0.85rem; margin-top: 0.5rem;">Ajoute pwodui pou kòmanse</p>
+                        </div>
+                    </div>
+                    
+                    <div class="cart-totals" id="cartTotals" style="display: none;">
+                        <div class="total-row subtotal">
+                            <span>Sou-total:</span>
+                            <span id="subtotal">0 Gdes</span>
+                        </div>
+                        <div class="total-row delivery">
+                            <span>Livrezon:</span>
+                            <span id="deliveryFee">0 Gdes</span>
+                        </div>
+                        <div class="total-row grand-total">
+                            <span>Total:</span>
+                            <span id="grandTotal">0 Gdes</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================
+         SECTION 5: CUSTOMER FORM
+    ============================================ -->
+    <section class="customer-form-section">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">Enfòmasyon Kliyan</span>
+                <h2 class="section-title">Ranpli Detay Ou Yo</h2>
+                <p class="section-subtitle">Tanpri ranpli enfòmasyon ou yo pou nou ka trete kòmand ou a</p>
+            </div>
+
+            <div class="form-container">
+                <form id="orderForm">
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="firstName">Non <span class="required">*</span></label>
+                            <input type="text" id="firstName" name="firstName" required placeholder="Non ou">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="lastName">Siyati <span class="required">*</span></label>
+                            <input type="text" id="lastName" name="lastName" required placeholder="Siyati ou">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="email">Imèl <span class="required">*</span></label>
+                            <input type="email" id="email" name="email" required placeholder="imel@egzanp.com">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="phone">Telefòn <span class="required">*</span></label>
+                            <input type="tel" id="phone" name="phone" required placeholder="+509 XXXX XXXX">
+                        </div>
+
+                        <div class="form-group full-width">
+                            <label for="address">Adrès <span class="required">*</span></label>
+                            <input type="text" id="address" name="address" required placeholder="Ki kote nou ka livre kòmand ou a">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="city">Vil <span class="required">*</span></label>
+                            <input type="text" id="city" name="city" required placeholder="Vil ou">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="department">Depatman <span class="required">*</span></label>
+                            <select id="department" name="department" required>
+                                <option value="">Chwazi depatman ou</option>
+                                <option value="Ouest">Lwès (Port-au-Prince)</option>
+                                <option value="Artibonite">Latibonit (Gonaïves)</option>
+                                <option value="Nord">Nò (Cap-Haïtien)</option>
+                                <option value="Sud">Sid (Les Cayes)</option>
+                                <option value="Centre">Sant (Hinche)</option>
+                                <option value="Nord-Ouest">Nòdwès (Port-de-Paix)</option>
+                                <option value="Nord-Est">Nòdès (Fort-Liberté)</option>
+                                <option value="Sud-Est">Sidès (Jacmel)</option>
+                                <option value="Nippes">Nip (Miragoâne)</option>
+                                <option value="Grand'Anse">Grandans (Jérémie)</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group full-width">
+                            <label>Metòd Livrezon <span class="required">*</span></label>
+                            <div class="delivery-options">
+                                <div class="delivery-option">
+                                    <input type="radio" id="delivery-standard" name="delivery" value="standard" checked>
+                                    <label for="delivery-standard">
+                                        <span class="option-icon">&#128666;</span>
+                                        <span class="option-name">Livrezon Regilye</span>
+                                        <span class="option-price">250 Gdes</span>
+                                    </label>
+                                </div>
+                                <div class="delivery-option">
+                                    <input type="radio" id="delivery-express" name="delivery" value="express">
+                                    <label for="delivery-express">
+                                        <span class="option-icon">&#128640;</span>
+                                        <span class="option-name">Livrezon Rapid</span>
+                                        <span class="option-price">500 Gdes</span>
+                                    </label>
+                                </div>
+                                <div class="delivery-option">
+                                    <input type="radio" id="delivery-pickup" name="delivery" value="pickup">
+                                    <label for="delivery-pickup">
+                                        <span class="option-icon">&#127970;</span>
+                                        <span class="option-name">Retire nan Boutik</span>
+                                        <span class="option-price">Gratis</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group full-width">
+                            <label>Metòd Peman <span class="required">*</span></label>
+                            <div class="payment-methods">
+                                <div class="payment-method">
+                                    <input type="radio" id="payment-cash" name="payment" value="cash" checked>
+                                    <label for="payment-cash">
+                                        <span class="method-icon">&#128176;</span>
+                                        <span class="method-name">Kach sou livrezon</span>
+                                    </label>
+                                </div>
+                                <div class="payment-method">
+                                    <input type="radio" id="payment-transfer" name="payment" value="transfer">
+                                    <label for="payment-transfer">
+                                        <span class="method-icon">&#128241;</span>
+                                        <span class="method-name">Transfè Moncash</span>
+                                    </label>
+                                </div>
+                                <div class="payment-method">
+                                    <input type="radio" id="payment-bank" name="payment" value="bank">
+                                    <label for="payment-bank">
+                                        <span class="method-icon">&#127974;</span>
+                                        <span class="method-name">Transfè Labank</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group full-width">
+                            <label for="notes">Nòt Espesyal (Opsyonèl)</label>
+                            <textarea id="notes" name="notes" placeholder="Nenpòt enfòmasyon espesyal sou kòmand ou a..."></textarea>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="submit-order-btn whatsapp-btn" id="submitBtn" disabled>
+                        <svg viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+                        </svg>
+                        <span>Voye Kòmand sou WhatsApp</span>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================
+         SECTION 6: FOOTER
+    ============================================ -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <a href="Accueil.html" class="footer-logo">
+                        <span class="logo-icon">&#127807;</span>
+                        <span class="logo-text">AgriTech</span>
+                    </a>
+                    <p class="footer-description">
+                        Soti nan tè nou yo rive sou tab ou, gou otantik Ayiti. 
+                        Nou konekte pwodiktè lokal yo ak mond lan.
+                    </p>
+                    <div class="footer-social">
+                        <a href="#" class="social-link" aria-label="Facebook">
+                            <svg viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+                        </a>
+                        <a href="#" class="social-link" aria-label="Instagram">
+                            <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+                        </a>
+                        <a href="#" class="social-link" aria-label="WhatsApp">
+                            <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="footer-links">
+                    <h4>Navigasyon</h4>
+                    <ul>
+                        <li><a href="Accueil.html#accueil">Akèy</a></li>
+                        <li><a href="Accueil.html#produits">Pwodui Nou Yo</a></li>
+                        <li><a href="Accueil.html#entrepots">Entrepôts</a></li>
+                        <li><a href="Accueil.html#entreprise">Biznis Nou</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-links">
+                    <h4>Kontak</h4>
+                    <ul>
+                        <li>&#128205; Hinche, Ayiti</li>
+                        <li>&#128222; +509 3833 3840</li>
+                        <li>&#9993; agritech01@gmail.com</li>
+                        <li>&#128336; Lundi-Samedi: 8h - 17h</li>
+                    </ul>
+                </div>
+
+                <div class="footer-newsletter">
+                    <h4>Newsletter</h4>
+                    <p>Abòne ou pou resevwa nouvèl ak ofrè espesyal nou yo.</p>
+                    <form class="newsletter-form">
+                        <input type="email" placeholder="Imèl ou" required>
+                        <button type="submit" class="btn-subscribe">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M5 12h14M12 5l7 7-7 7"/>
+                            </svg>
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2026 AgriTech. Tout dwa rezève.</p>
+                <div class="footer-legal">
+                    <a href="#">Règleman Konfidansyalite</a>
+                    <a href="#">Kondisyon Itilizasyon</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Success Modal -->
+    <div class="modal-overlay" id="successModal">
+        <div class="modal-content">
+            <div class="success-icon">&#9989;</div>
+            <h2>Kòmand Ou a Anrejistre!</h2>
+            <p>Mèsi pou konfyans ou. Nou pral trete kòmand ou a epi nou pral kontakte ou byen vit.</p>
+            <div class="order-number" id="orderNumber">#AGT-2026-0001</div>
+            <button class="modal-btn" onclick="closeModal()">Retounen nan Akèy</button>
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script>
+        // ============================================
+        // PRODUCTS DATA
+        // ============================================
+        const products = [
+            { id: 1, name: 'Mang', description: 'Mang mi, dous kou siwo', price: 150, unit: 'dizèn', image: 'https://images.unsplash.com/photo-1553279768-865429fa0078?w=400', category: 'fruits' },
+            { id: 2, name: 'Bannann Planten', description: 'Bannann planten vèt', price: 200, unit: 'dizèn', image: 'https://images.unsplash.com/photo-1571771894821-ce9b6c11b08e?w=400', category: 'fruits' },
+            { id: 3, name: 'Zaboka', description: 'Zaboka fre, gra kou bè', price: 100, unit: '3 pou', image: 'https://images.unsplash.com/photo-1523049673856-6ae2c1c2e1c7?w=400', category: 'fruits' },
+            { id: 4, name: 'Pwa Kongo', description: 'Pwa kongo seche', price: 300, unit: 'marmit', image: 'https://images.unsplash.com/photo-1557844352-761f2565b576?w=400', category: 'cereales' },
+            { id: 5, name: 'Mayi Moulen', description: 'Mayi moulen byen fen', price: 250, unit: 'marmit', image: 'https://images.unsplash.com/photo-1551754655-cd27e38d2076?w=400', category: 'cereales' },
+            { id: 6, name: 'Manyòk', description: 'Manyòk fre, byen dous', price: 150, unit: '5 liv', image: 'https://images.unsplash.com/photo-1590165482129-1b8b27698780?w=400', category: 'terroir' },
+            { id: 7, name: 'Manyan', description: 'Manyan fre pou soup', price: 75, unit: 'boukè', image: 'https://images.unsplash.com/photo-1540420773420-3366772f4999?w=400', category: 'legumes' },
+            { id: 8, name: 'Piman Bouk', description: 'Piman bouk cho cho', price: 50, unit: '10', image: 'https://images.unsplash.com/photo-1588252303782-cb80119abd6d?w=400', category: 'terroir' },
+            { id: 9, name: 'Lam Veritab', description: 'Lam veritab fre', price: 400, unit: 'gwo', image: 'https://images.unsplash.com/photo-1615485290382-441e4d049cb5?w=400', category: 'terroir' },
+            { id: 10, name: 'Kokoye', description: 'Kokoye fre pou lalo', price: 100, unit: '3', image: 'https://images.unsplash.com/photo-1544376798-89aa6b82c6cd?w=400', category: 'terroir' },
+            { id: 11, name: 'Pwa Nwa', description: 'Pwa nwa seche', price: 350, unit: 'marmit', image: 'https://images.unsplash.com/photo-1557844352-761f2565b576?w=400', category: 'cereales' },
+            { id: 12, name: 'Sikrek', description: 'Sikrek dous pou bouyi', price: 125, unit: '5 liv', image: 'https://images.unsplash.com/photo-1592417817098-8fd3d9eb14a5?w=400', category: 'legumes' },
+            { id: 13, name: 'Epinard', description: 'Epinard fre, byen vèt', price: 50, unit: 'boukè', image: 'https://images.unsplash.com/photo-1576045057995-568f588f82fb?w=400', category: 'legumes' },
+            { id: 14, name: 'Toma', description: 'Toma mi, dous dous', price: 100, unit: '5 liv', image: 'https://images.unsplash.com/photo-1592924357228-91a4daadcfea?w=400', category: 'legumes' },
+            { id: 15, name: 'Pesi', description: 'Pesi fre pou epis', price: 25, unit: 'boukè', image: 'https://images.unsplash.com/photo-1629157247277-37f5494f4591?w=400', category: 'herbes' },
+            { id: 16, name: 'Koriand', description: 'Koriand fre pou epis', price: 25, unit: 'boukè', image: 'https://images.unsplash.com/photo-1629157247277-37f5494f4591?w=400', category: 'herbes' },
+            { id: 17, name: 'Konfiti Gwayav', description: 'Konfiti gwayav fet nan kay', price: 250, unit: 'po', image: 'https://images.unsplash.com/photo-1568051243851-f9b136146e97?w=400', category: 'specialites' },
+            { id: 18, name: 'Pikliz', description: 'Pikliz cho cho', price: 150, unit: 'po', image: 'https://images.unsplash.com/photo-1588252303782-cb80119abd6d?w=400', category: 'specialites' }
+        ];
+
+        // Cart State
+        let cart = [];
+        let preSelectedProduct = null;
+
+        // DOM Elements
+        const productsGrid = document.getElementById('productsGrid');
+        const cartItems = document.getElementById('cartItems');
+        const cartTotals = document.getElementById('cartTotals');
+        const itemCount = document.getElementById('itemCount');
+        const submitBtn = document.getElementById('submitBtn');
+        const successModal = document.getElementById('successModal');
+
+        // WhatsApp Number
+        const WHATSAPP_NUMBER = '50938333840';
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            checkPreSelectedProduct();
+            renderProducts();
+            setupEventListeners();
+        });
+
+        // Check for pre-selected product from URL
+        function checkPreSelectedProduct() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const produit = urlParams.get('produit');
+            const prix = urlParams.get('prix');
+            const description = urlParams.get('description');
+            const categorie = urlParams.get('categorie');
+
+            if (produit && prix) {
+                preSelectedProduct = {
+                    name: produit,
+                    price: parseInt(prix),
+                    description: description || '',
+                    category: categorie || 'general'
+                };
+                
+                // Scroll to products section after a short delay
+                setTimeout(() => {
+                    document.querySelector('.products-selection').scrollIntoView({ 
+                        behavior: 'smooth', 
+                        block: 'center' 
+                    });
+                }, 500);
+            }
+        }
+
+        // Render Products
+        function renderProducts() {
+            productsGrid.innerHTML = products.map(product => {
+                const isPreSelected = preSelectedProduct && 
+                    (product.category === preSelectedProduct.category || 
+                     product.name.toLowerCase().includes(preSelectedProduct.name.toLowerCase().split(' ')[0]));
+                
+                return `
+                    <div class="order-product-card ${isPreSelected ? 'pre-selected' : ''}" data-id="${product.id}" id="card-${product.id}">
+                        <div class="order-product-image">
+                            <img src="${product.image}" alt="${product.name}" onerror="this.src='https://via.placeholder.com/400x300?text=${encodeURIComponent(product.name)}'">
+                            <span class="order-product-price">${product.price} Gdes</span>
+                        </div>
+                        <div class="order-product-info">
+                            ${isPreSelected ? '<span class="pre-selected-banner">&#9733; Pwodui Chwazi</span>' : ''}
+                            <h4>${product.name}</h4>
+                            <p>${product.description} - ${product.unit}</p>
+                            <div class="quantity-control">
+                                <button class="qty-btn" onclick="updateQuantity(${product.id}, -1)">-</button>
+                                <input type="number" class="qty-input" id="qty-${product.id}" value="0" min="0" readonly>
+                                <button class="qty-btn" onclick="updateQuantity(${product.id}, 1)">+</button>
+                            </div>
+                            <button class="add-to-order-btn" id="btn-${product.id}" onclick="addToCart(${product.id})">
+                                <span>Ajoute nan kòmand</span>
+                            </button>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        // Update Quantity
+        function updateQuantity(productId, change) {
+            const qtyInput = document.getElementById(`qty-${productId}`);
+            let newValue = parseInt(qtyInput.value) + change;
+            if (newValue < 0) newValue = 0;
+            qtyInput.value = newValue;
+        }
+
+        // Add to Cart
+        function addToCart(productId) {
+            const qtyInput = document.getElementById(`qty-${productId}`);
+            const quantity = parseInt(qtyInput.value);
+            
+            if (quantity === 0) {
+                alert('Tanpri chwazi kantite ou vle a');
+                return;
+            }
+
+            const product = products.find(p => p.id === productId);
+            const existingItem = cart.find(item => item.id === productId);
+
+            if (existingItem) {
+                existingItem.quantity += quantity;
+            } else {
+                cart.push({ ...product, quantity });
+            }
+
+            // Update UI
+            const card = document.querySelector(`[data-id="${productId}"]`);
+            card.classList.add('selected');
+            
+            const btn = document.getElementById(`btn-${productId}`);
+            btn.classList.add('added');
+            btn.innerHTML = '<span>&#10003; Ajoute!</span>';
+            
+            setTimeout(() => {
+                btn.classList.remove('added');
+                btn.innerHTML = '<span>Ajoute nan kòmand</span>';
+            }, 1500);
+
+            qtyInput.value = 0;
+            updateCart();
+        }
+
+        // Update Cart Display
+        function updateCart() {
+            const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+            itemCount.textContent = `${totalItems} atik`;
+
+            if (cart.length === 0) {
+                cartItems.innerHTML = `
+                    <div class="empty-cart">
+                        <div class="empty-cart-icon">&#128722;</div>
+                        <p>Panje ou a vid</p>
+                        <p style="font-size: 0.85rem; margin-top: 0.5rem;">Ajoute pwodui pou kòmanse</p>
+                    </div>
+                `;
+                cartTotals.style.display = 'none';
+                submitBtn.disabled = true;
+            } else {
+                cartItems.innerHTML = cart.map(item => `
+                    <div class="cart-item">
+                        <div class="cart-item-info">
+                            <div class="cart-item-name">${item.name}</div>
+                            <div class="cart-item-qty">${item.quantity} x ${item.price} Gdes</div>
+                        </div>
+                        <div class="cart-item-price">${item.quantity * item.price} Gdes</div>
+                        <button class="remove-item-btn" onclick="removeFromCart(${item.id})">&#10005;</button>
+                    </div>
+                `).join('');
+                cartTotals.style.display = 'block';
+                submitBtn.disabled = false;
+            }
+
+            updateTotals();
+        }
+
+        // Remove from Cart
+        function removeFromCart(productId) {
+            cart = cart.filter(item => item.id !== productId);
+            
+            const card = document.querySelector(`[data-id="${productId}"]`);
+            if (card) card.classList.remove('selected');
+            
+            updateCart();
+        }
+
+        // Update Totals
+        function updateTotals() {
+            const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            
+            let deliveryFee = 250; // Standard
+            const deliveryMethod = document.querySelector('input[name="delivery"]:checked');
+            if (deliveryMethod) {
+                switch(deliveryMethod.value) {
+                    case 'express': deliveryFee = 500; break;
+                    case 'pickup': deliveryFee = 0; break;
+                    default: deliveryFee = 250;
+                }
+            }
+
+            document.getElementById('subtotal').textContent = `${subtotal} Gdes`;
+            document.getElementById('deliveryFee').textContent = `${deliveryFee} Gdes`;
+            document.getElementById('grandTotal').textContent = `${subtotal + deliveryFee} Gdes`;
+        }
+
+        // Setup Event Listeners
+        function setupEventListeners() {
+            // Hamburger Menu
+            const hamburger = document.getElementById('hamburger');
+            const navLinks = document.getElementById('navLinks');
+            
+            hamburger.addEventListener('click', function() {
+                hamburger.classList.toggle('active');
+                navLinks.classList.toggle('active');
+            });
+
+            // Close menu on link click
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.addEventListener('click', function() {
+                    hamburger.classList.remove('active');
+                    navLinks.classList.remove('active');
+                });
+            });
+
+            // Delivery option change
+            document.querySelectorAll('input[name="delivery"]').forEach(radio => {
+                radio.addEventListener('change', updateTotals);
+            });
+
+            // Form Submit - WhatsApp Integration
+            document.getElementById('orderForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                if (cart.length === 0) {
+                    alert('Tanpri ajoute omwen yon pwodui nan kòmand ou a');
+                    return;
+                }
+
+                sendOrderToWhatsApp();
+            });
+
+            // Newsletter Form
+            document.querySelector('.newsletter-form').addEventListener('submit', function(e) {
+                e.preventDefault();
+                const input = this.querySelector('input');
+                const button = this.querySelector('button');
+                
+                if (input.value) {
+                    button.innerHTML = '&#10003;';
+                    button.style.background = '#28a745';
+                    input.value = '';
+                    input.placeholder = 'Mèsi pou abònman ou!';
+                    
+                    setTimeout(() => {
+                        button.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>`;
+                        button.style.background = '';
+                        input.placeholder = 'Imèl ou';
+                    }, 3000);
+                }
+            });
+        }
+
+        // Send Order to WhatsApp
+        function sendOrderToWhatsApp() {
+            // Get form data
+            const firstName = document.getElementById('firstName').value;
+            const lastName = document.getElementById('lastName').value;
+            const email = document.getElementById('email').value;
+            const phone = document.getElementById('phone').value;
+            const address = document.getElementById('address').value;
+            const city = document.getElementById('city').value;
+            const department = document.getElementById('department').value;
+            const delivery = document.querySelector('input[name="delivery"]:checked').value;
+            const payment = document.querySelector('input[name="payment"]:checked').value;
+            const notes = document.getElementById('notes').value;
+
+            // Calculate totals
+            const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            let deliveryFee = 250;
+            if (delivery === 'express') deliveryFee = 500;
+            if (delivery === 'pickup') deliveryFee = 0;
+            const total = subtotal + deliveryFee;
+
+            // Generate order number
+            const orderNumber = 'AGT-' + new Date().getFullYear() + '-' + Math.floor(1000 + Math.random() * 9000);
+
+            // Build WhatsApp message
+            let message = `&#127807; *K&#210;MAND AGRITECH* &#127807;\n\n`;
+            message += `*Nimew&#242; K&#242;mand:* #${orderNumber}\n`;
+            message += `*Dat:* ${new Date().toLocaleDateString('fr-FR')}\n\n`;
+            
+            message += `&#128100; *ENF&#210;MASYON KLIYAN*\n`;
+            message += `Non: ${firstName} ${lastName}\n`;
+            message += `Im&#232;l: ${email}\n`;
+            message += `Telef&#242;n: ${phone}\n`;
+            message += `Adr&#232;s: ${address}\n`;
+            message += `Vil: ${city}\n`;
+            message += `Depatman: ${department}\n\n`;
+            
+            message += `&#128722; *PWODUI YO*\n`;
+            cart.forEach((item, index) => {
+                message += `${index + 1}. ${item.name}\n`;
+                message += `   Kantite: ${item.quantity} ${item.unit}\n`;
+                message += `   Pri: ${item.price} Gdes/${item.unit}\n`;
+                message += `   Sou-total: ${item.price * item.quantity} Gdes\n\n`;
+            });
+            
+            message += `&#128666; *LIVREZON*\n`;
+            const deliveryText = {
+                'standard': 'Livrezon Regilye (250 Gdes)',
+                'express': 'Livrezon Rapid (500 Gdes)',
+                'pickup': 'Retire nan Boutik (Gratis)'
+            };
+            message += `Met&#242;d: ${deliveryText[delivery]}\n\n`;
+            
+            message += `&#128176; *PEMAN*\n`;
+            const paymentText = {
+                'cash': 'Kach sou livrezon',
+                'transfer': 'Transf&#232; Moncash',
+                'bank': 'Transf&#232; Labank'
+            };
+            message += `Met&#242;d: ${paymentText[payment]}\n\n`;
+            
+            message += `&#128181; *RESIME PRI*\n`;
+            message += `Sou-total pwodui: ${subtotal} Gdes\n`;
+            message += `Fr&#232; livrezon: ${deliveryFee} Gdes\n`;
+            message += `*TOTAL: ${total} Gdes*\n\n`;
+            
+            if (notes) {
+                message += `&#128172; *N&#210;T:* ${notes}\n\n`;
+            }
+            
+            message += `M&#232;si pou konfyans ou! Nou pral kontakte ou byen vit. &#127807;`;
+
+            // Encode message for URL
+            const encodedMessage = encodeURIComponent(message);
+            
+            // Create WhatsApp URL
+            const whatsappURL = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodedMessage}`;
+            
+            // Show order number in modal
+            document.getElementById('orderNumber').textContent = '#' + orderNumber;
+            successModal.classList.add('active');
+            
+            // Open WhatsApp in new tab
+            window.open(whatsappURL, '_blank');
+        }
+
+        // Close Modal
+        function closeModal() {
+            successModal.classList.remove('active');
+            // Reset form and cart
+            cart = [];
+            updateCart();
+            document.getElementById('orderForm').reset();
+            document.querySelectorAll('.order-product-card').forEach(card => {
+                card.classList.remove('selected');
+            });
+            window.location.href = 'Accueil.html';
+        }
+
+        // Close modal on overlay click
+        successModal.addEventListener('click', function(e) {
+            if (e.target === successModal) {
+                closeModal();
+            }
+        });
+    </script>
+</body>
+</html>

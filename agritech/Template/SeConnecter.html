@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="ht">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Koneksyon - AGRITECH</title>
+    <link rel="stylesheet" href="../Statique/Styles/styleseconnecter.css">
+</head>
+<body>
+    
+    <div class="login-container">
+        
+        <!-- Seksyon Imaj (Goch) -->
+        <div class="login-image-section">
+            
+            <div class="login-image-overlay">
+                <span>
+                    <ul>
+                        <div class="footer-links">
+                            <li> <a href="Accueil.html"> &#8592; Back </a> </li>
+                        </div> 
+                    </ul>   
+                </span>
+            </div>
+            <div class="login-image-content">
+                
+                <div class="login-logo"> 
+                    <span class="login-logo-icon">&#127807;</span>
+                    
+                    <span>AGRITECH</span>
+                </div>
+                <h2>Byenveni nan AGRITECH</h2>
+                <p>Konekte ak kominote agrikòl Ayiti a. Achte pwodwi fre, peyi natirèl, dirèkteman nan men pwodiktè lokal yo.</p>
+                
+                <div class="login-features">
+                    <div class="login-feature">
+                        <span class="login-feature-icon">&#128230;</span>
+                    <div class="login-feature-text">
+                            <strong>Pwodwi Fres</strong>
+                            <span>Rekòlte dirèk nan jaden</span>
+                        </div>
+                    </div>
+                    <div class="login-feature">
+                        <span class="login-feature-icon">&#128666;</span>
+                        <div class="login-feature-text">
+                            <strong>Livrezon Rapid</strong>
+                            <span>Jwenn pwodwi ou nan 24è</span>
+                        </div>
+                    </div>
+                    <div class="login-feature">
+                        <span class="login-feature-icon">&#128100;</span>
+                        <div class="login-feature-text">
+                            <strong>Sipòte Pwodiktè</strong>
+                            <span>Ede kominote agrikòl la</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Seksyon Fòm (Dwat) -->
+        <div class="login-form-section">
+            <div class="login-form-container">
+                <div class="login-header">
+                    <h1>Konekte</h1>
+                    <p>Antre enfòmasyon ou pou kontinye</p>
+                </div>
+
+                <!-- Tab yo -->
+                <div class="login-tabs">
+                    <button class="login-tab active" onclick="showForm('login')">Konekte</button>
+                    <button class="login-tab" onclick="showForm('signup')">Kreye Kont</button>
+                </div>
+                
+                <!-- Bouton Google -->
+                <button class="google-btn" onclick="loginWithGoogle()">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
+                        <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
+                        <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/>
+                        <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/>
+                    </svg>
+                    <span>Konekte ak Google</span>
+                </button>
+
+                <!-- Separatè -->
+                <div class="divider">oswa</div>
+
+                <!-- Fòm Koneksyon -->
+                <form class="login-form" id="loginForm" onsubmit="handleLogin(event)">
+                    <div class="form-group">
+                        <label for="login-email">Imèl</label>
+                        <input type="email" id="login-email" name="email" placeholder="antre@imel.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="login-password">Modpas</label>
+                        <input type="password" id="login-password" name="password" placeholder="********" required>
+                    </div>
+                    <div class="form-options">
+                        <label class="remember-me">
+                            <input type="checkbox" name="remember">
+                            <span>Ramn mwen</span>
+                        </label>
+                        <a href="#" class="forgot-password">Bliye modpas?</a>
+                    </div>
+                    <button type="submit" class="btn-login">
+                        <span>Konekte</span>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </button>
+                </form>
+
+                <!-- Fòm Enskripsyon -->
+                <form class="signup-form" id="signupForm" onsubmit="handleSignup(event)">
+                    <div class="form-group">
+                        <label for="signup-name">Non Konplè</label>
+                        <input type="text" id="signup-name" name="name" placeholder="Jan Koukou" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="signup-email">Imèl</label>
+                        <input type="email" id="signup-email" name="email" placeholder="antre@imel.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="signup-password">Modpas</label>
+                        <input type="password" id="signup-password" name="password" placeholder="********" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="signup-confirm">Konfime Modpas</label>
+                        <input type="password" id="signup-confirm" name="confirm" placeholder="********" required>
+                    </div>
+                    <button type="submit" class="btn-login">
+                        <span>Kreye Kont</span>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </button>
+                </form>
+
+                <!-- Lénk enskripsyon -->
+                <div class="signup-link">
+                    <p id="signupText">Ou poko gen kont? <a href="#" onclick="showForm('signup'); return false;">Kreye yon kont</a></p>
+                    <p id="loginText" style="display: none;">Ou deja gen kont? <a href="#" onclick="showForm('login'); return false;">Konekte</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script>
+        // Fonksyon pou chanje ant koneksyon ak enskripsyon
+        function showForm(formType) {
+            const loginForm = document.getElementById('loginForm');
+            const signupForm = document.getElementById('signupForm');
+            const tabs = document.querySelectorAll('.login-tab');
+            const signupText = document.getElementById('signupText');
+            const loginText = document.getElementById('loginText');
+            const headerTitle = document.querySelector('.login-header h1');
+            const headerDesc = document.querySelector('.login-header p');
+
+            if (formType === 'login') {
+                loginForm.classList.remove('hidden');
+                signupForm.classList.remove('active');
+                signupText.style.display = 'block';
+                loginText.style.display = 'none';
+                headerTitle.textContent = 'Konekte';
+                headerDesc.textContent = 'Antre enfòmasyon ou pou kontinye';
+                
+                tabs[0].classList.add('active');
+                tabs[1].classList.remove('active');
+            } else {
+                loginForm.classList.add('hidden');
+                signupForm.classList.add('active');
+                signupText.style.display = 'none';
+                loginText.style.display = 'block';
+                headerTitle.textContent = 'Kreye Kont';
+                headerDesc.textContent = 'Ranpli enfòmasyon ou anba a';
+                
+                tabs[0].classList.remove('active');
+                tabs[1].classList.add('active');
+            }
+        }
+
+        // Fonksyon pou konekte ak Google
+        function loginWithGoogle() {
+            // Isit la ou ka ajoute entegrasyon Google OAuth
+            alert('Koneksyon ak Google pral disponib byento!');
+            // Redireksyon: window.location.href = '/auth/google';
+        }
+
+        // Fonksyon pou jere koneksyon
+        function handleLogin(event) {
+            event.preventDefault();
+            const email = document.getElementById('login-email').value;
+            const password = document.getElementById('login-password').value;
+            
+            // Validasyon senp
+            if (email && password) {
+                // Isit la ou ka ajoute lojik koneksyon ou a
+                alert('Koneksyon an kòrèk! Byenveni ' + email);
+                // Redireksyon: window.location.href = '/dashboard';
+            }
+        }
+
+        // Fonksyon pou jere enskripsyon
+        function handleSignup(event) {
+            event.preventDefault();
+            const name = document.getElementById('signup-name').value;
+            const email = document.getElementById('signup-email').value;
+            const password = document.getElementById('signup-password').value;
+            const confirm = document.getElementById('signup-confirm').value;
+            
+            // Validasyon
+            if (password !== confirm) {
+                alert('Modpas yo pa matche!');
+                return;
+            }
+            
+            if (name && email && password) {
+                // Isit la ou ka ajoute lojik enskripsyon ou a
+                alert('Kont kreye avèk siksè! Byenveni ' + name);
+                // Redireksyon: window.location.href = '/dashboard';
+            }
+        }
+
+        // Animasyon pou fòm yo
+        document.addEventListener('DOMContentLoaded', function() {
+            const inputs = document.querySelectorAll('input');
+            
+            inputs.forEach(input => {
+                input.addEventListener('focus', function() {
+                    this.parentElement.style.transform = 'scale(1.02)';
+                });
+                
+                input.addEventListener('blur', function() {
+                    this.parentElement.style.transform = 'scale(1)';
+                });
+            });
+        });
+    </script>
+</body>
+</html>
